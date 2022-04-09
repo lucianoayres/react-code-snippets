@@ -2,7 +2,7 @@
 
 Run async requests with status, data loading and error handling states.
 
-Author: [Kent C. Dodds](https://github.com 'Author: Kent C. Dodds')
+[Source](https://github.com/kentcdodds/bookshelf 'Author: Kent C. Dodds')
 
 ## Code Snippet
 
