@@ -2,7 +2,7 @@
 
 Make HTTP requests with custom configuration.
 
-[Source](https://github.com/kentcdodds/bookshelf 'Author: Kent C. Dodds')
+[Author: Kent C. Dodds](https://github.com/kentcdodds/bookshelf 'Author: Kent C. Dodds')
 
 ## Code Snippet
 
