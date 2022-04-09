@@ -10,4 +10,4 @@ A collection of reusable code snippets for React 17+.
 ## Utils
 
 - [api-client](https://github.com/lucianoayres/react-code-snippets/blob/main/snippets/utils/api-client.md 'api-client function')
-  - Make HTTP requests with custom configuration.
+  - Make HTTP requests with custom configurations.
