@@ -1,6 +1,6 @@
 # api-client Function
 
-Make HTTP requests with custom configuration.
+Make HTTP requests with custom configurations.
 
 [Author: Kent C. Dodds](https://github.com/kentcdodds/bookshelf 'Author: Kent C. Dodds')
 
