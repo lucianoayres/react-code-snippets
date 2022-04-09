@@ -7,11 +7,11 @@ Author: (Kent C. Dodds)[https://github.com]
 ## Code Snippet
 
 ```javascript
-import * as React from 'react'
+import * as { useRef, useState, useEffect, useCallback, useReducer } from 'react'
 
 function useSafeDispatch(dispatch) {
-  const mounted = React.useRef(false)
-  React.useLayoutEffect(() => {
+  const mounted = useRef(false)
+  useLayoutEffect(() => {
     mounted.current = true
     return () => (mounted.current = false)
   }, [])
@@ -27,27 +27,27 @@ function useAsync(initialState) {
     ...defaultInitialState,
     ...initialState
   })
-  const [{ status, data, error }, setState] = React.useReducer(
+  const [{ status, data, error }, setState] = useReducer(
     (s, a) => ({ ...s, ...a }),
     initialStateRef.current
   )
 
   const safeSetState = useSafeDispatch(setState)
 
-  const setData = React.useCallback(
+  const setData = useCallback(
     (data) => safeSetState({ data, status: 'resolved' }),
     [safeSetState]
   )
-  const setError = React.useCallback(
+  const setError = useCallback(
     (error) => safeSetState({ error, status: 'rejected' }),
     [safeSetState]
   )
-  const reset = React.useCallback(
+  const reset = useCallback(
     () => safeSetState(initialStateRef.current),
     [safeSetState]
   )
 
-  const run = React.useCallback(
+  const run = useCallback(
     (promise) => {
       if (!promise || !promise.then) {
         throw new Error(
@@ -94,7 +94,7 @@ export { useAsync }
 /** @jsx jsx */
 import {jsx} from '@emotion/core'
 
-import * as React from 'react'
+import { useState, useEffect } from 'react'
 import Tooltip from '@reach/tooltip'
 import {FaSearch} from 'react-icons/fa'
 import {Input, BookListUL, Spinner} from './components/lib'
@@ -106,10 +106,10 @@ import { useAsync } from './utils/hooks'
 function DiscoverBooksScreen() {
   const { data, error, run, isLoading, isError, isSuccess } = useAsync()
 
-  const [query, setQuery] = React.useState('')
-  const [queried, setQueried] = React.useState(false)
+  const [query, setQuery] = useState('')
+  const [queried, setQueried] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!queried) {
       return
     }
