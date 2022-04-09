@@ -7,7 +7,7 @@ Run async requests with status, data loading and error handling states.
 ## Code Snippet
 
 ```javascript
-import * as { useRef, useState, useEffect, useCallback, useReducer } from 'react'
+import { useRef, useState, useEffect, useCallback, useReducer } from 'react'
 
 function useSafeDispatch(dispatch) {
   const mounted = useRef(false)
