@@ -2,7 +2,7 @@
 
 Run async requests with status, data loading and error handling states.
 
-[Source](https://github.com/kentcdodds/bookshelf 'Author: Kent C. Dodds')
+[Author: Kent C. Dodds](https://github.com/kentcdodds/bookshelf 'Author: Kent C. Dodds')
 
 Related: [api-client]() function
 
