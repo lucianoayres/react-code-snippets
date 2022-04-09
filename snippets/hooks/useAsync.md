@@ -1,4 +1,4 @@
-### useAsync Hook
+# useAsync Hook
 
 Run async requests with status, data loading and error handling states.
 
@@ -21,11 +21,6 @@ function useSafeDispatch(dispatch) {
   )
 }
 
-// Example usage:
-// const {data, error, status, run} = useAsync()
-// React.useEffect(() => {
-//   run(fetchPokemon(pokemonName))
-// }, [pokemonName, run])
 const defaultInitialState = { status: 'idle', data: null, error: null }
 function useAsync(initialState) {
   const initialStateRef = React.useRef({
@@ -75,7 +70,6 @@ function useAsync(initialState) {
   )
 
   return {
-    // using the same names that react-query uses for convenience
     isIdle: status === 'idle',
     isLoading: status === 'pending',
     isError: status === 'rejected',
@@ -92,4 +86,177 @@ function useAsync(initialState) {
 }
 
 export { useAsync }
+```
+
+### Example Usage
+
+```javascript
+/** @jsx jsx */
+import {jsx} from '@emotion/core'
+
+import * as React from 'react'
+import Tooltip from '@reach/tooltip'
+import {FaSearch} from 'react-icons/fa'
+import {Input, BookListUL, Spinner} from './components/lib'
+import {BookRow} from './components/book-row'
+import { client } from './utils/api-client'
+import * as colors from './styles/colors'
+import { useAsync } from './utils/hooks'
+
+function DiscoverBooksScreen() {
+  const { data, error, run, isLoading, isError, isSuccess } = useAsync()
+
+  const [query, setQuery] = React.useState('')
+  const [queried, setQueried] = React.useState(false)
+
+  React.useEffect(() => {
+    if (!queried) {
+      return
+    }
+
+    run(client(`books?query=${encodeURIComponent(query)}`))
+
+  }, [query, queried, run])
+
+  function handleSearchSubmit(event) {
+    event.preventDefault()
+    setQueried(true)
+    setQuery(event.target.elements.search.value)
+  }
+
+  return (
+    <div
+      css={{maxWidth: 800, margin: 'auto', width: '90vw', padding: '40px 0'}}
+    >
+      <form onSubmit={handleSearchSubmit}>
+        <Input
+          placeholder="Search books..."
+          id="search"
+          css={{width: '100%'}}
+        />
+        <Tooltip label="Search Books">
+          <label htmlFor="search">
+            <button
+              type="submit"
+              css={{
+                border: '0',
+                position: 'relative',
+                marginLeft: '-35px',
+                background: 'transparent',
+              }}
+            >
+              {isLoading ? <Spinner /> : <FaSearch aria-label="search" />}
+            </button>
+          </label>
+        </Tooltip>
+      </form>
+
+      {isError ? (
+
+      ) : null}
+
+      {isSuccess ? (
+        data?.books?.length ? (
+          <BookListUL css={{marginTop: 20}}>
+            {data.books.map(book => (
+              <li key={book.id} aria-label={book.title}>
+                <BookRow key={book.id} book={book} />
+              </li>
+            ))}
+          </BookListUL>
+        ) : (
+          <p>No books found. Try another search.</p>
+        )
+      ) : null}
+    </div>
+  )
+}
+
+export {DiscoverBooksScreen}
+
+
+```
+
+### Example Usage
+
+```javascript
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
+
+import * as React from 'react'
+import Tooltip from '@reach/tooltip'
+import { FaSearch } from 'react-icons/fa'
+import { Input, BookListUL, Spinner } from './components/lib'
+import { BookRow } from './components/book-row'
+import { client } from './utils/api-client'
+import * as colors from './styles/colors'
+import { useAsync } from './utils/hooks'
+
+function DiscoverBooksScreen() {
+  const { data, error, run, isLoading, isError, isSuccess } = useAsync()
+
+  const [query, setQuery] = React.useState('')
+  const [queried, setQueried] = React.useState(false)
+
+  React.useEffect(() => {
+    if (!queried) {
+      return
+    }
+
+    run(client(`books?query=${encodeURIComponent(query)}`))
+  }, [query, queried, run])
+
+  function handleSearchSubmit(event) {
+    event.preventDefault()
+    setQueried(true)
+    setQuery(event.target.elements.search.value)
+  }
+
+  return (
+    <div
+      css={{ maxWidth: 800, margin: 'auto', width: '90vw', padding: '40px 0' }}
+    >
+      <form onSubmit={handleSearchSubmit}>
+        <Input
+          placeholder="Search books..."
+          id="search"
+          css={{ width: '100%' }}
+        />
+        <Tooltip label="Search Books">
+          <label htmlFor="search">
+            <button
+              type="submit"
+              css={{
+                border: '0',
+                position: 'relative',
+                marginLeft: '-35px',
+                background: 'transparent'
+              }}
+            >
+              {isLoading ? <Spinner /> : <FaSearch aria-label="search" />}
+            </button>
+          </label>
+        </Tooltip>
+      </form>
+
+      {isError ? <p>Oops, something went wrong: {Error}</p> : null}
+
+      {isSuccess ? (
+        data?.books?.length ? (
+          <BookListUL css={{ marginTop: 20 }}>
+            {data.books.map((book) => (
+              <li key={book.id} aria-label={book.title}>
+                <BookRow key={book.id} book={book} />
+              </li>
+            ))}
+          </BookListUL>
+        ) : (
+          <p>No books found. Try another search.</p>
+        )
+      ) : null}
+    </div>
+  )
+}
+
+export { DiscoverBooksScreen }
 ```
