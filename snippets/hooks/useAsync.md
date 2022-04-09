@@ -4,7 +4,7 @@ Run async requests with status, data loading and error handling states.
 
 [Author: Kent C. Dodds](https://github.com/kentcdodds/bookshelf 'Author: Kent C. Dodds')
 
-Related: [api-client]() function
+Related: [api-client](https://github.com/lucianoayres/react-code-snippets/blob/main/snippets/utils/api-client.md 'api-client function') function
 
 ## Code Snippet
 
