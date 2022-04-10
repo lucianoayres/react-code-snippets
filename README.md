@@ -6,6 +6,8 @@ A collection of reusable code snippets for React 17+.
 
 - [useAsync](https://github.com/lucianoayres/react-code-snippets/blob/main/snippets/hooks/useAsync.md 'useAsync Hook')
   - Run async requests with status, data loading and error handling states.
+- [useEffectSkipInitialRender](https://github.com/lucianoayres/react-code-snippets/blob/main/snippets/hooks/useEffectSkipFirstRender.md 'useEffectSkipInitialRender example hook')
+  - Run useEffect with a dependency array and skip initial render.
 
 ## Components
 
