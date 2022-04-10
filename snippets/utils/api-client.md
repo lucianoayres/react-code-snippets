@@ -7,7 +7,7 @@ Make HTTP requests with custom configurations.
 ## JavaScript
 
 ```javascript
-function client(endpoint, customConfig = {}) {
+export function client(endpoint, customConfig = {}) {
   const config = {
     method: 'GET',
     ...customConfig
@@ -17,8 +17,6 @@ function client(endpoint, customConfig = {}) {
     (response) => response.json()
   )
 }
-
-export { client }
 ```
 
 ### Example Usage (JavaScript)
@@ -27,22 +25,12 @@ export { client }
 
 ```javascript
 import { useState, useEffect } from 'react'
+import { client } from './api-client'
 import './styles.css'
 
 export default function App() {
   const [apiData, setApiData] = useState([])
   const gitHubUserRepoEndpoint = 'users/lucianoayres/repos'
-
-  function client(endpoint, customConfig = {}) {
-    const config = {
-      method: 'GET',
-      ...customConfig
-    }
-
-    return fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, config).then(
-      (response) => response.json()
-    )
-  }
 
   useEffect(() => {
     client(gitHubUserRepoEndpoint).then((data) => {
@@ -69,7 +57,7 @@ export default function App() {
 ## TypeScript
 
 ```typescript
-function client(endpoint: string, customConfig = {}): Promise<[]> {
+export function client(endpoint: string, customConfig = {}): Promise<[]> {
   console.log(`${process.env.REACT_APP_API_URL}/${endpoint}`)
   const config = {
     method: 'GET',
@@ -88,22 +76,12 @@ function client(endpoint: string, customConfig = {}): Promise<[]> {
 
 ```typescript
 import { useState, useEffect } from 'react'
+import { client } from './api-client'
 import './styles.css'
 
 export default function App() {
   const [apiData, setApiData] = useState([])
   const gitHubUserRepoEndpoint = 'users/lucianoayres/repos'
-
-  function client(endpoint: string, customConfig = {}): Promise<[]> {
-    const config = {
-      method: 'GET',
-      ...customConfig
-    }
-
-    return fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, config).then(
-      (response) => response.json()
-    )
-  }
 
   useEffect(() => {
     client(gitHubUserRepoEndpoint).then((data: []) => {
