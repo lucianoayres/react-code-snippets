@@ -2,9 +2,9 @@
 
 Basic example of an uncontrolled form without using the useRef hook.
 
-[View it on CodeSandbox](https://codesandbox.io/s/react-uncontrolled-form-example-ooyyn9?file=/src/UncontrolledForm.js:0-1782 'React uncontrolled form code snippet')
+## JavaScript
 
-## Code Snippet
+[View it on CodeSandbox](https://codesandbox.io/s/react-uncontrolled-form-example-ooyyn9?file=/src/UncontrolledForm.js:0-1782 'React uncontrolled form code snippet')
 
 ```javascript
 import { useState } from 'react'
