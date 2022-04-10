@@ -4,7 +4,7 @@ Make HTTP requests with custom configurations.
 
 [Author: Kent C. Dodds](https://github.com/kentcdodds/bookshelf 'Author: Kent C. Dodds')
 
-## Code Snippet
+## JavaScript
 
 ```javascript
 function client(endpoint, customConfig = {}) {
@@ -13,12 +13,27 @@ function client(endpoint, customConfig = {}) {
     ...customConfig
   }
 
-  return window
-    .fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, config)
-    .then((response) => response.json())
+  return fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, config).then(
+    (response) => response.json()
+  )
 }
 
 export { client }
+```
+
+## TypeScript
+
+```typescript
+function client(endpoint: string, customConfig = {}): Promise<[]> {
+  const config = {
+    method: 'GET',
+    ...customConfig
+  }
+
+  return fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, config).then(
+    (response) => response.json()
+  )
+}
 ```
 
 ### Example Usage
