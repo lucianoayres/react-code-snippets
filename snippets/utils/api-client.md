@@ -27,7 +27,6 @@ export { client }
 
 ```javascript
 import { useState, useEffect } from 'react'
-
 import './styles.css'
 
 export default function App() {
@@ -89,7 +88,6 @@ function client(endpoint: string, customConfig = {}): Promise<[]> {
 
 ```typescript
 import { useState, useEffect } from 'react'
-
 import './styles.css'
 
 export default function App() {
@@ -97,7 +95,6 @@ export default function App() {
   const gitHubUserRepoEndpoint = 'users/lucianoayres/repos'
 
   function client(endpoint: string, customConfig = {}): Promise<[]> {
-    console.log(`${process.env.REACT_APP_API_URL}/${endpoint}`)
     const config = {
       method: 'GET',
       ...customConfig
