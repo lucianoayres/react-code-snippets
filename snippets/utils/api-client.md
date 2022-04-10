@@ -35,7 +35,6 @@ export default function App() {
   const gitHubUserRepoEndpoint = 'users/lucianoayres/repos'
 
   function client(endpoint, customConfig = {}) {
-    console.log(`${process.env.REACT_APP_API_URL}/${endpoint}`)
     const config = {
       method: 'GET',
       ...customConfig
