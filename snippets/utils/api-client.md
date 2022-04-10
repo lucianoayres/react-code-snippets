@@ -19,7 +19,7 @@ export function client(endpoint, customConfig = {}) {
 }
 ```
 
-### Example Usage (JavaScript)
+### Example Usage
 
 [View it on CodeSandbox](https://codesandbox.io/s/api-client-javascript-h3nh7h?file=/src/App.js 'Javascript api-client function code snippet')
 
@@ -70,7 +70,7 @@ export function client(endpoint: string, customConfig = {}): Promise<[]> {
 }
 ```
 
-### Example Usage (TypeScript)
+### Example Usage
 
 [View it on CodeSandbox](https://codesandbox.io/s/async-river-m2tgbp?file=/src/App.tsx 'TypeScript api-client function code snippet')
 
