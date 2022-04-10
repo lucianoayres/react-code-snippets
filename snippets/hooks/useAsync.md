@@ -4,8 +4,6 @@ Run async requests with status, data loading and error handling states.
 
 [Author: Kent C. Dodds](https://github.com/kentcdodds/bookshelf 'Author: Kent C. Dodds')
 
-Related: [api-client](https://github.com/lucianoayres/react-code-snippets/blob/main/snippets/utils/api-client.md 'api-client function') function
-
 ## JavaScript
 
 ```javascript
@@ -92,6 +90,10 @@ export function useAsync(initialState) {
 ### Example Usage
 
 [View it on CodeSandbox](https://codesandbox.io/s/useasync-javascript-mpq8lb?file=/src/App.js 'JavaScript useAsync code snippet')
+
+Dependency:
+
+- [api-client](https://github.com/lucianoayres/react-code-snippets/blob/main/snippets/utils/api-client.md 'api-client function')
 
 ```javascript
 import { useEffect } from 'react'
@@ -227,6 +229,10 @@ export function useAsync(initialState = {}) {
 ### Example Usage
 
 [View it on CodeSandbox](https://codesandbox.io/s/useasync-typescript-um5qqw?file=/src/App.tsx 'Typescript useAsync code snippet')
+
+Dependency:
+
+- [api-client](https://github.com/lucianoayres/react-code-snippets/blob/main/snippets/utils/api-client.md 'api-client function')
 
 ```typescript
 import { useEffect } from 'react'
