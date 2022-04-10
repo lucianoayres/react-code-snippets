@@ -7,6 +7,11 @@ A collection of reusable code snippets for React 17+.
 - [useAsync](https://github.com/lucianoayres/react-code-snippets/blob/main/snippets/hooks/useAsync.md 'useAsync Hook')
   - Run async requests with status, data loading and error handling states.
 
+## Components
+
+- [UncontrolledForm](https://github.com/lucianoayres/react-code-snippets/blob/main/snippets/components/UncontrolledForm.md 'React uncontrolled form code snippet')
+  - Basic example of an uncontrolled form without using the useRef hook.
+
 ## Utils
 
 - [api-client](https://github.com/lucianoayres/react-code-snippets/blob/main/snippets/utils/api-client.md 'api-client function')
