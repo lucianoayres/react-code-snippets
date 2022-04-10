@@ -91,7 +91,7 @@ export function useAsync(initialState) {
 
 ### Example Usage
 
-[View it on CodeSandbox]('JavaScript useAsync code snippet')
+[View it on CodeSandbox](https://codesandbox.io/s/useasync-javascript-mpq8lb?file=/src/App.js 'JavaScript useAsync code snippet')
 
 ```javascript
 import { useEffect } from 'react'
