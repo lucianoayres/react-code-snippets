@@ -91,86 +91,52 @@ export function useAsync(initialState) {
 
 ### Example Usage
 
+[View it on CodeSandbox]('JavaScript useAsync code snippet')
+
 ```javascript
-/** @jsx jsx */
-import { jsx } from '@emotion/core'
-
-import { useState, useEffect } React from 'react'
-import Tooltip from '@reach/tooltip'
-import { FaSearch } from 'react-icons/fa'
-import { Input, BookListUL, Spinner } from './components/lib'
-import { BookRow } from './components/book-row'
+import { useEffect } from 'react'
+import { useAsync } from './utils/useAsync'
 import { client } from './utils/api-client'
-import * as colors from './styles/colors'
-import { useAsync } from './utils/hooks'
 
-function DiscoverBooksScreen() {
+import './styles.css'
+
+export default function App() {
   const { data, error, run, isLoading, isError, isSuccess } = useAsync()
-
-  const [query, setQuery] = useState('')
-  const [queried, setQueried] = useState(false)
+  const gitHubUserRepoEndpoint = 'users/lucianoayres/repos'
 
   useEffect(() => {
-    if (!queried) {
-      return
-    }
-
-    run(client(`books?query=${encodeURIComponent(query)}`))
-  }, [query, queried, run])
-
-  function handleSearchSubmit(event) {
-    event.preventDefault()
-    setQueried(true)
-    setQuery(event.target.elements.search.value)
-  }
+    run(client(gitHubUserRepoEndpoint))
+  }, [run])
 
   return (
-    <div
-      css={{ maxWidth: 800, margin: 'auto', width: '90vw', padding: '40px 0' }}
-    >
-      <form onSubmit={handleSearchSubmit}>
-        <Input
-          placeholder="Search books..."
-          id="search"
-          css={{ width: '100%' }}
-        />
-        <Tooltip label="Search Books">
-          <label htmlFor="search">
-            <button
-              type="submit"
-              css={{
-                border: '0',
-                position: 'relative',
-                marginLeft: '-35px',
-                background: 'transparent'
-              }}
-            >
-              {isLoading ? <Spinner /> : <FaSearch aria-label="search" />}
-            </button>
-          </label>
-        </Tooltip>
-      </form>
+    <div className="App">
+      <h1>GitHub API URL</h1>
+      <p>{process.env.REACT_APP_API_URL}</p>
+      <h2>Endpoint</h2>
+      <p>{gitHubUserRepoEndpoint}</p>
 
-      {isError ? <p>Oops, something went wrong: {Error}</p> : null}
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : isError ? (
+        <p>Error: {error.message}</p>
+      ) : null}
 
       {isSuccess ? (
-        data?.books?.length ? (
-          <BookListUL css={{ marginTop: 20 }}>
-            {data.books.map((book) => (
-              <li key={book.id} aria-label={book.title}>
-                <BookRow key={book.id} book={book} />
+        data?.length ? (
+          <ul>
+            {data.map(({ id, name }) => (
+              <li key={id} aria-label={name}>
+                {name}
               </li>
             ))}
-          </BookListUL>
+          </ul>
         ) : (
-          <p>No books found. Try another search.</p>
+          <p>No repositories found. Try another search.</p>
         )
       ) : null}
     </div>
   )
 }
-
-export { DiscoverBooksScreen }
 ```
 
 ## TypeScript
@@ -194,7 +160,7 @@ function useSafeDispatch(dispatch: any) {
 
 const defaultInitialState = { status: 'idle', data: null, error: null }
 
-export function useAsync(initialState: any) {
+export function useAsync(initialState = {}) {
   const initialStateRef = useRef({
     ...defaultInitialState,
     ...initialState
@@ -260,84 +226,55 @@ export function useAsync(initialState: any) {
 
 ### Example Usage
 
+[View it on CodeSandbox](https://codesandbox.io/s/useasync-typescript-um5qqw?file=/src/App.tsx 'Typescript useAsync code snippet')
+
 ```typescript
-/** @jsx jsx */
-import { jsx } from '@emotion/core'
-
-import { useState, useEffect } React from 'react'
-import Tooltip from '@reach/tooltip'
-import { FaSearch } from 'react-icons/fa'
-import { Input, BookListUL, Spinner } from './components/lib'
-import { BookRow } from './components/book-row'
+import { useEffect } from 'react'
+import { useAsync } from './utils/useAsync'
 import { client } from './utils/api-client'
-import * as colors from './styles/colors'
-import { useAsync } from './utils/hooks'
 
-function DiscoverBooksScreen() {
+import './styles.css'
+
+interface RepositoryData {
+  id: string
+  name: string
+}
+
+export default function App() {
   const { data, error, run, isLoading, isError, isSuccess } = useAsync()
-
-  const [query, setQuery] = useState('')
-  const [queried, setQueried] = useState(false)
+  const gitHubUserRepoEndpoint = 'users/lucianoayres/repos'
 
   useEffect(() => {
-    if (!queried) {
-      return
-    }
-
-    run(client(`books?query=${encodeURIComponent(query)}`))
-  }, [query, queried, run])
-
-  function handleSearchSubmit(event) {
-    event.preventDefault()
-    setQueried(true)
-    setQuery(event.target.elements.search.value)
-  }
+    run(client(gitHubUserRepoEndpoint))
+  }, [run])
 
   return (
-    <div
-      css={{ maxWidth: 800, margin: 'auto', width: '90vw', padding: '40px 0' }}
-    >
-      <form onSubmit={handleSearchSubmit}>
-        <Input
-          placeholder="Search books..."
-          id="search"
-          css={{ width: '100%' }}
-        />
-        <Tooltip label="Search Books">
-          <label htmlFor="search">
-            <button
-              type="submit"
-              css={{
-                border: '0',
-                position: 'relative',
-                marginLeft: '-35px',
-                background: 'transparent'
-              }}
-            >
-              {isLoading ? <Spinner /> : <FaSearch aria-label="search" />}
-            </button>
-          </label>
-        </Tooltip>
-      </form>
+    <div className="App">
+      <h1>GitHub API URL</h1>
+      <p>{process.env.REACT_APP_API_URL}</p>
+      <h2>Endpoint</h2>
+      <p>{gitHubUserRepoEndpoint}</p>
 
-      {isError ? <p>Oops, something went wrong: {Error}</p> : null}
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : isError ? (
+        <p>Error: {error.message}</p>
+      ) : null}
 
       {isSuccess ? (
-        data?.books?.length ? (
-          <BookListUL css={{ marginTop: 20 }}>
-            {data.books.map((book) => (
-              <li key={book.id} aria-label={book.title}>
-                <BookRow key={book.id} book={book} />
+        data?.length ? (
+          <ul>
+            {data.map(({ id, name }: RepositoryData) => (
+              <li key={id} aria-label={name}>
+                {name}
               </li>
             ))}
-          </BookListUL>
+          </ul>
         ) : (
-          <p>No books found. Try another search.</p>
+          <p>No repositories found. Try another search.</p>
         )
       ) : null}
     </div>
   )
 }
-
-export { DiscoverBooksScreen }
 ```
